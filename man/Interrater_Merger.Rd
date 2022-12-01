@@ -10,14 +10,13 @@ Interrater_Merger(
   R1_Type = ".txt",
   R1_Deliminator = "\\t",
   R1 = "",
-  IR_Directory,
-  IR_Keyword = FALSE,
-  IR_Type = ".txt",
-  IR_Deliminator = "\\t",
-  IR = "",
+  Revised_Directory,
+  RA_Keyword = FALSE,
+  RA_Type = ".txt",
+  RA_Deliminator = "\\t",
+  RA = "",
   Artifact,
   Artifact_Action = TRUE,
-  Uniform_Output = TRUE,
   ...
 )
 }
@@ -32,12 +31,6 @@ Interrater_Merger(
 
 \item{R1}{The initial of rater 1.}
 
-\item{Artifact}{A value serves as artifact labeling}
-
-\item{Artifact_Action}{A logical parameter indicating the action used in case of artifact labeling between raters. If TRUE, artifacts mis-alignments will be treated as differences between raters. If FALSE, the non-artifact label will be used as the annotation for the mini-epoch. When FALSE was passed to the function, it will generate a new column called 'Artifacts'. <Default: "TRUE">}
-
-\item{Uniform_Output}{To specify if the user wish to export files containing interrater differences into the first rater's folder, TRUE, or in duplicates downstream of folders that contain raters annotation separately, FALSE. <Default: TRUE>}
-
 \item{Revised_Directory}{Directory of where the annotations were made by the second rater <e.g. "C:/Users/___YOUR USERNAME___/UPSTREAM FOLDER/.../FOLDER NAME/">}
 
 \item{RA_Keyword}{Specify keywords for the stage files. Make sure to provide the maximum patterns shared among files.}
@@ -47,6 +40,10 @@ Interrater_Merger(
 \item{RA_Deliminator}{If the data is stored in .txt file and the deliminator is not TAB as default, please, specify it. <default: "\t">}
 
 \item{RA}{The initial of rater 2.}
+
+\item{Artifact}{A value serves as artifact labeling}
+
+\item{Artifact_Action}{A logical parameter indicating the action used in case of artifact labeling between raters. If TRUE, artifacts mis-alignments will be treated as differences between raters. If FALSE, the non-artifact label will be used as the annotation for the mini-epoch. When FALSE was passed to the function, it will generate a new column called 'Artifacts'. <Default: "TRUE">}
 }
 \value{
 Export interrater differences for each annotation file for further revision

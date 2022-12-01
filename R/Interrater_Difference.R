@@ -36,12 +36,13 @@ Importer(Rater2_Directory,file_type = R2_type,Keyword = R2_Keyword,Deliminator =
 
 
 # Create Directory for Check Point Results
-Directory <- paste0(Rater1_Directory,"/Check-point/",Sys.Date())
-if(dir.exists(Directory)==FALSE) dir.create(Directory)
 
+### Check Directory ------------------------
+if(dir.exists(paste0(Rater1_Directory,"/Divergence/"))) dir.create(paste0(Rater1_Directory,"/Divergence/"))
+if(isFALSE(Uniform_Output)){
+  if(dir.exists(paste0(Rater2_Directory,"/Divergence/"))) dir.create(paste0(Rater2_Directory,"/Divergence/"))
+}
 
-df <- data.frame(matrix(nrow=length(R2_List),ncol=1))
-names(df) <- "ID"
 
 
 
@@ -61,13 +62,6 @@ R2_List_Name <- unlist(lapply(R2_List_Name,function(x){gsub(R2_Keyword,replaceme
 
 if(any(!cOnset=="Onset"|!cDuration=="Duration"|!cAnnotation=="Annotation")){
 
-  R2_List <- lapply(R2_List,function(x){
-    if(!cOnset=="Onset")  names(x)[names(x) %in% cOnset] <- "Onset"
-    if(!cDuration=="Duration") names(x)[names(x) %in% cDuration] <- "Duration"
-    if(!cAnnotation=="Annotation") names(x)[names(x) %in% cAnnotation] <- "Annotation"
-    x
-  })
-  names(R2_List) <- R2_List_Name
 
   R1_List <- lapply(R1_List,function(x){
     if(!cOnset=="Onset")  names(x)[names(x) %in% cOnset] <- "Onset"
@@ -76,6 +70,15 @@ if(any(!cOnset=="Onset"|!cDuration=="Duration"|!cAnnotation=="Annotation")){
     x
   })
   names(R1_List) <- R1_List_Name
+
+  R2_List <- lapply(R2_List,function(x){
+    if(!cOnset=="Onset")  names(x)[names(x) %in% cOnset] <- "Onset"
+    if(!cDuration=="Duration") names(x)[names(x) %in% cDuration] <- "Duration"
+    if(!cAnnotation=="Annotation") names(x)[names(x) %in% cAnnotation] <- "Annotation"
+    x
+  })
+  names(R2_List) <- R2_List_Name
+
 }
 
 
@@ -84,20 +87,20 @@ List_Name <- R1_List_Name[R1_List_Name %in% R2_List_Name]
 
 #################################  Check  Stage Annotations   ######################################
 ### R1 ------------------------------------------
-names(SF_List) <- SF_List_Name
-df <- data.frame(matrix(nrow=length(SF_List),ncol=1))
+names(R1_List) <- R1_List_Name
+df <- data.frame(matrix(nrow=length(R1_List),ncol=1))
 names(df) <- "ID"
-df$ID <- SF_List_Name
-df$SF_List <- unlist(lapply(SF_List,nrow))
+df$ID <- R1_List_Name
+df$R1_List <- unlist(lapply(R1_List,nrow))
 
 
 
 ### R2 ------------------------------------------
-names(AF_List) <- AF_List_Name
-df2 <- data.frame(matrix(nrow=length(AF_List),ncol=1))
+names(R2_List) <- R2_List_Name
+df2 <- data.frame(matrix(nrow=length(R2_List),ncol=1))
 names(df2) <- "ID"
-df2$ID <- AF_List_Name
-df2$AF_List <- unlist(lapply(AF_List_Stage,nrow))
+df2$ID <- R2_List_Name
+df2$R2_List <- unlist(lapply(R2_List_Stage,nrow))
 
 
 ### Warning Missing Annotations ------------------------------------------
@@ -143,9 +146,9 @@ for(i in List_Name){
   dk <- df[df$Note =="FPFN",]
 
   if(isFALSE(Artifact_Action)){
-  Final<- reshape2::melt(dK[c("Onset","Duration","Annotation.x","Annotation.y","Artifact")],id=c("Onset","Duration"))
+  Final<- reshape2::melt(dk[c("Onset","Duration","Annotation.x","Annotation.y","Artifact")],id=c("Onset","Duration"))
   } else {
-  Final <- reshape2::melt(dK[c("Onset","Duration","Annotation.x","Annotation.y")],id=c("Onset","Duration"))
+  Final <- reshape2::melt(dk[c("Onset","Duration","Annotation.x","Annotation.y")],id=c("Onset","Duration"))
   }
 
 
@@ -157,12 +160,6 @@ for(i in List_Name){
 
   }
 
-
-### Check Directory ------------------------
-  if(dir.exists(paste0(Rater1_Directory,"/Divergence/"))) dir.create(paste0(Rater1_Directory,"/Divergence/"))
-  if(isFALSE(Uniform_Output)){
-    if(dir.exists(paste0(Rater2_Directory,"/Divergence/"))) dir.create(paste0(Rater2_Directory,"/Divergence/"))
-  }
 
 
 ### Export Report ------------------------

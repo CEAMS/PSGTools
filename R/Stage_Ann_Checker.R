@@ -42,8 +42,8 @@ Stage_Ann_Checker <- function(Annotation_Directory, AF_Keyword=FALSE,AF_Type=".t
 
 if(!require("stringdist",character.only = TRUE)) stop("Package 'stringdist' not found")
 
-  Importer(Annotation_Directory,file_type = AF_type,Keyword = AF_Keyword,Deliminator = "\t",inList = TRUE,Meta_List_Name = AF_List)
-  Importer(Stage_Directory,file_type = SF_type,Keyword = SF_Keyword,Deliminator = "\t",inList = TRUE,Meta_List_Name = SF_List)
+  Importer(Annotation_Directory,file_type = AF_type,Keyword = AF_Keyword,Deliminator = AF_Deliminator,inList = TRUE,Meta_List_Name = AF_List)
+  Importer(Stage_Directory,file_type = SF_type,Keyword = SF_Keyword,Deliminator = SF_Deliminator,inList = TRUE,Meta_List_Name = SF_List)
 
 
 # Create Directory for Check Point Results
