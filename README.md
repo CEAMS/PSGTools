@@ -9,7 +9,7 @@ The package contains two main classes of functions.
     - Respiration Biomatrix: RRV_Estimator 
     - Occular Movement Biomatrix:
     - Artifact Removal: 
-    In addition, there are several useful functions designed to facilitate polysomnography analyses and the preparation. These include Importer, Annotation_Simplifer
+In addition, there are several useful functions designed to facilitate polysomnography analyses and the preparation. These include Importer, Annotation_Simplifer
    
 2. Sleep Medicine/Health Research
     - Apnea Screen
