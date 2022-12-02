@@ -1,7 +1,7 @@
 #' A Function to Automatically Import Files in a Folder
 #'
-#' This function will loop over logistic regressions in a data frame specified with at least 1 unadjusted model and an adjusted one, cross-sectionally.
-#' To avoid phaking, the pipeline will automatically detect underpower study and aborpt. Please, check Peduzzi 1996 for calculating statistical powers.
+#' This function imports files with the same file type as specified in bulk. Users are required to provide the directory to the folder containing files to be imported. #' Importer supports files in .txt and .tsv. Users can determine if the imported files should be merged into a data list structure or as separate data.frame.
+#' If unsure, users may be able to determine by simply opening one of the files in notepad++. Common deliminators include tabs "/t" , comma "," , semicolon ";" , and period "." .
 #'
 #' @import readr
 #' @param directory Directory of where the files that you want to import <e.g. "C:/Users/___YOUR USERNAME___/UPSTREAM FOLDER/.../FOLDER NAME/">

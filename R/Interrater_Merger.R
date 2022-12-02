@@ -94,9 +94,9 @@ Interrater_Merger <- function(Rater1_Directory, R1_Keyword=FALSE,R1_Type=".txt",
     df <- merge.data.frame(R1_List[[x]],RA_List[[x]],by=c("Onset","Duration"),all=TRUE)
 
     ### Check Rater Initials ------------------------
-    if(!all(c(R1=="",R2==""))){
+    if(!all(c(R1=="",RA==""))){
       df$Annotation.1 <- gsub(R1,"", df$Annotation.x)
-      df$Annotation.2 <- gsub(R2,"", df$Annotation.y)
+      df$Annotation.2 <- gsub(RA,"", df$Annotation.y)
     } else {
       df$Annotation.1 <- df$Annotation.x
       df$Annotation.2 <- df$Annotation.y
